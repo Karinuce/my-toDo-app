@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+  font-family: 'Ubuntu', -apple-system, sans-serif, system-ui;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.toDo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 750px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
+  font-size: 14px;
+  
+  &_sidebar {
+    background-color: #f4f6f8;
+    width: 200px;
+    border-right: 3px solid #f1f1f1;
+    padding: 60px 20px;
+    height: calc(100% - 120px);
+  }
+}
