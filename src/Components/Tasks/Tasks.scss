@@ -1,0 +1,123 @@
+.tasks {  
+    &_title {
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 39px;
+      color: #B6E6BD;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #efefef;
+      
+
+      &_editBTN {
+        opacity: 0.2;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        margin-left: 15px;
+       
+        &:hover {
+            opacity: 0.3;
+        }
+      }
+    }
+
+    &_form {
+        &-block {
+            button {
+                margin-right: 10px;
+                margin-top: 15px;
+            }
+        }
+        &-new {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            cursor: pointer;
+            opacity: 0.4;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            img {
+                width: 16px;
+                height: 16px;
+                margin-left: 4px;
+            }
+
+            span {
+                font-size: 16px;
+                padding-left: 9px;
+            }
+        }
+    }
+
+    &_items {
+        margin-top: 30px;
+
+        h2 {
+            font-size: 22px;
+            color: #c9d1d3;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        &-text {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            
+            p {
+                margin-left: 15px;
+            }
+        }
+    }
+
+    .checkbox {
+        input {
+            display: none;
+        }
+
+        input:checked + label {
+            background-color: #27b15c;
+            border-color: #27b15c;
+
+            svg{
+                opacity: 1;
+                path {
+                    stroke:#ffffff;
+                    fill:#ffffff;
+                    opacity: 1;
+                }
+            }
+        }
+
+        &:hover {
+            label{
+                background-color: #efefef;
+                border-color: #efefef;
+                svg{
+                    opacity: 1;
+                    path {
+                        stroke:#9b9b9b;
+                        fill:#9b9b9b;
+                    }
+                }
+            }
+        }
+        label {
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #efefef;
+        border-radius: 30px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+
+            svg {
+                opacity: 0;
+            }
+        }
+    }
+}

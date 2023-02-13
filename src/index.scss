@@ -16,11 +16,12 @@ body {
   left: 50%;
   top: 50%;
   width: 750px;
-  height: 500px;
+  height: 600px;
   transform: translate(-50%, -50%);
   border-radius: 10px;
   border: 3px solid #f1f1f1;
   font-size: 14px;
+  display: flex;
   
   &_sidebar {
     background-color: #f4f6f8;
@@ -28,5 +29,58 @@ body {
     border-right: 3px solid #f1f1f1;
     padding: 60px 20px;
     height: calc(100% - 120px);
+  }
+
+  &_tasks {
+    flex: 1;
+    padding: 60px;
+  }
+}
+
+.field {
+  background: #ffffff;
+  border: 1px solid #efefef;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 14px;
+
+  &:focus {
+    border-color: #f8f6f6;
+  }
+}
+
+.button {
+  background: #2cbd85;
+  border-radius: 4px;
+  color: #ffffff;
+  border: 0;
+  padding: 8px 50px;
+  cursor: pointer;
+
+  &:hover {
+    background: darken(#2cbd85, 6%);
+  }
+
+  &.active {
+    background: (#2cbd85, 7%);
+  }
+
+  &:disabled {
+    background: #d8d8d8;
+  }
+
+  &-grey {
+    background: #f4f6f8;
+    color: #444444;
+
+    &:hover {
+      background: darken(#f5f6f8, 5%)
+    }
+
+    &:active {
+      background: darken(#f5f6f8, 7%)
+    }
   }
 }

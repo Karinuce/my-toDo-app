@@ -1,14 +1,56 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import List from '../List';
 import './AddBList.scss';
+import ColorBadge from '../ColorBadges';
+import CloseSvg from '../../Assets/icons/close.svg';
+import axios from 'axios';
 
-const AddBList = () => {
+const AddBList = ({colors, onAdd}) => {
     const[visibleWindow, showWindow] = useState(false);
+    const[selectedColor, selectColor] = useState(3);
+    const[textValue, setTextValue] = useState('');
+    const[isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        if (Array.isArray(colors)){
+        selectColor(colors[0].id);
+        }
+    }, [colors]);
+
+    const onClose = () => {
+        showWindow(false);
+        setTextValue('');
+        selectColor(colors[0].id);
+    }
+
+    const addList = () => {
+        if (!textValue) {
+            alert("Please enter project's name");
+            return;
+        }
+        setIsLoading(true);
+        axios
+        .post('http://localhost:3001/lists', {
+            name: textValue, 
+            colorId: selectedColor})
+        .then(({data}) => {
+            const color = colors.filter(c => c.id === selectedColor)[0].name;
+            const listObj ={...data, color: {name: color}};
+            onAdd(listObj);
+            onClose();
+        })
+        .catch(() => {
+            alert('Error when adding project!')
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
+    };
 
     return (
         <div className="addB-list">
             <List 
-            onClick={() => showWindow(true)}
+            onClick={() => showWindow(!visibleWindow)}
                 items={[
                 {
                     className: "list_add-button",
@@ -29,8 +71,32 @@ const AddBList = () => {
                 }
                 ]}
             />
-            {visibleWindow && (<div className="addB-list_extra-window">
-                
+            {visibleWindow && (
+            <div className="addB-list_extra-window">
+                <img 
+                    onClick={() => onClose()}
+                    src={CloseSvg} 
+                    alt="Close window button" 
+                    className="addB-list_extra-window-closeBTN"/>
+                <input 
+                    value={textValue} 
+                    onChange={e => setTextValue(e.target.value)}
+                    className="field" 
+                    type="text" 
+                    placeholder="Project name"/>
+                <div className="addB-list_extra-window-colors">
+                    {colors.map(color => (
+                        <ColorBadge 
+                            onClick={() => selectColor(color.id)} 
+                            key={color.id} 
+                            color={color.name}
+                            className={selectedColor === color.id && 'active'}
+                        />
+                    ))}
+                </div>
+                <button onClick={addList} className="button">
+                    {isLoading ? 'Adding...' : 'Add'}
+                </button>
             </div>)}
         </div>
     );
