@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {List, AddBList, Tasks} from "./Components";
 import axios from 'axios';
+import {Route, Routes} from 'react-router-dom';
 
 function App() {
   const [lists, setLists] = useState(null);
@@ -31,6 +32,67 @@ function App() {
     setLists(newList);
   }
 
+  const onEditTask = (listId, taskObj) => {
+    const newTaskText = window.prompt('Task text', taskObj.text);
+    if (!newTaskText) {
+      return;
+    }
+    const newList = lists.map(list => {
+      if (list.id === listId) {
+        list.tasks = list.tasks.map(task => {
+          if (task.id === taskObj.id) {
+            task.text = newTaskText;
+          }
+          return task;
+        });
+      }
+      return list;
+    });
+    setLists(newList);
+    axios
+      .patch('http://localhost:3001/tasks/' + taskObj.id, {text: newTaskText})
+      .catch(() => {
+        alert('Failed to edit task!')
+      }); 
+  };
+
+  const onRemoveTask = (listId, taskId) => {
+    if (window.confirm('Do you really want to delete this task?')){
+      const newList = lists.map(item => {
+        if (item.id === listId) {
+          item.tasks = item.tasks.filter(task => task.id !== taskId);
+        }
+        return item;
+      });
+      setLists(newList);
+      axios
+        .delete('http://localhost:3001/tasks/' + taskId)
+        .catch(() => {
+          alert('Failed to delete task!')
+        }); 
+    }
+};
+
+  const onCompleteTask = (listId, taskId, completed) => {
+    const newList = lists.map(list => {
+      if (list.id === listId) {
+        list.tasks = list.tasks.map(task => {
+          if (task.id === taskId) {
+            task.completed = completed;
+          }
+          return task;
+        });
+      }
+      return list;
+    });
+    setLists(newList);
+    axios
+      .patch('http://localhost:3001/tasks/' + taskId, {completed})
+      .catch(() => {
+        alert('Failed to complete task!')
+      }); 
+  }
+
   const onEditListTitle = (id, title) => {
     const newList = lists.map(item => {
       if (item.id === id) {
@@ -47,7 +109,7 @@ function App() {
         <List 
           items={[
             {
-              active: true,
+              active: !activeItem,
               icon: (
                 <svg 
                   width="16px" 
@@ -86,13 +148,35 @@ function App() {
         <AddBList onAdd={onAddList} colors={colors}/>
       </div>
       <div className="toDo_tasks">
-        {lists &&  activeItem && (
-        <Tasks 
-          list={activeItem} 
-          onAddTask={onAddTask}
-          onEditTitle={onEditListTitle}
-        />
-        )}
+        <Routes>
+        <Route exact path="/" element={
+            lists && lists.map(list => (
+              <Tasks 
+                key={list.id}
+                list={list} 
+                onAddTask={onAddTask}
+                onEditTitle={onEditListTitle}
+                onRemoveTask={onRemoveTask}
+                onEditTask={onEditTask}
+                onCempleteTask={onCompleteTask}
+                withoutEmpty
+              />
+            ))
+          }>
+        </Route>
+        <Route exact path="/lists/:id" element={
+            lists &&  activeItem && (
+              <Tasks 
+                list={activeItem} 
+                onAddTask={onAddTask}
+                onEditTitle={onEditListTitle}
+                onRemoveTask={onRemoveTask}
+                onEditTask={onEditTask}
+                onCempleteTask={onCompleteTask}
+              />
+        )}>
+        </Route>
+        </Routes>
       </div>
     </div>
   );
