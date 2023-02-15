@@ -106,7 +106,7 @@
       "id": 4,
       "listId": 2,
       "text": "Add React-Router",
-      "completed": false
+      "completed": true
     },
     {
       "listId": 1,
@@ -125,6 +125,60 @@
       "text": "Flowers for mom's birthday",
       "completed": false,
       "id": 8
+    },
+    {
+      "listId": 5,
+      "text": "Drink champagne",
+      "completed": true,
+      "id": 9
+    },
+    {
+      "listId": 5,
+      "text": "Finish FrontEnd courses",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "listId": 3,
+      "text": "The last of us series",
+      "completed": false,
+      "id": 11
+    },
+    {
+      "listId": 3,
+      "text": "Dead silence",
+      "completed": false,
+      "id": 12
+    },
+    {
+      "listId": 3,
+      "text": "Megan",
+      "completed": false,
+      "id": 13
+    },
+    {
+      "listId": 7,
+      "text": "Learn more about React",
+      "completed": false,
+      "id": 14
+    },
+    {
+      "listId": 7,
+      "text": "React-router",
+      "completed": false,
+      "id": 15
+    },
+    {
+      "listId": 7,
+      "text": "Become advanced at least at HTML, CSS and JS",
+      "completed": false,
+      "id": 16
+    },
+    {
+      "listId": 2,
+      "text": "Finish studies and start learning extra",
+      "completed": false,
+      "id": 17
     }
   ]
 }
