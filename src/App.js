@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {List, AddBList, Tasks} from "./Components";
 import axios from 'axios';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, Link} from 'react-router-dom';
 
 function App() {
   const [lists, setLists] = useState(null);
@@ -106,6 +106,7 @@ function App() {
   return (
     <div className="toDo">
       <div className="toDo_sidebar">
+        <Link to={`/`}>
         <List 
           items={[
             {
@@ -129,6 +130,7 @@ function App() {
             }
           ]}
         />
+        </Link>
         {lists ? (
         <List 
           items={lists}
@@ -164,7 +166,7 @@ function App() {
             ))
           }>
         </Route>
-        <Route exact path="/lists/:id" element={
+        <Route path="/lists/:id" element={
             lists &&  activeItem && (
               <Tasks 
                 list={activeItem} 
@@ -172,7 +174,7 @@ function App() {
                 onEditTitle={onEditListTitle}
                 onRemoveTask={onRemoveTask}
                 onEditTask={onEditTask}
-                onCempleteTask={onCompleteTask}
+                onCompleteTask={onCompleteTask}
               />
         )}>
         </Route>

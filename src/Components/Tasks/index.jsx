@@ -4,7 +4,7 @@ import EditSvg from '../../Assets/icons/edit.svg';
 import axios from 'axios';
 import AddTaskForm from './AddTaskForm';
 import Task from './Task'
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Tasks = ({list, onEditTitle, onAddTask, onRemoveTask, onEditTask, onCompleteTask, withoutEmpty}) => {
     const editTitle = () => {
@@ -23,7 +23,7 @@ const Tasks = ({list, onEditTitle, onAddTask, onRemoveTask, onEditTask, onComple
 
     return (
         <div className="tasks">
-            <NavLink to={`/lists/${list.id}`}>
+            <Link to={`/lists/${list.id}`}>
                 <h1 style={{color: list.color.hex}}
                     className="tasks_title">
                         {list.name}
@@ -33,7 +33,7 @@ const Tasks = ({list, onEditTitle, onAddTask, onRemoveTask, onEditTask, onComple
                         alt="Edit project's name icon" 
                         className="tasks_title_editBTN"/>
                 </h1>
-            </NavLink>
+            </Link>
             <div className="tasks_items">
                 {!withoutEmpty && list.tasks && !list.tasks.length && 
                     <h2>There are no tasks in this project</h2>}

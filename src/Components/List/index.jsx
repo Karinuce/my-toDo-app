@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import ColorBadge from '../ColorBadges';
 import CancelSvg from '../../Assets/icons/cancel.svg'
 import axios from 'axios';
+import {Link, useParams} from 'react-router-dom';
 
 function List ({items, isRemovable, onClick, onRemove, onClickItem, activeItem}) {
     const removeList = (item) => {
@@ -13,11 +14,18 @@ function List ({items, isRemovable, onClick, onRemove, onClickItem, activeItem})
             });
         }
     }
+    let {id} = useParams();
+
     return (
     <ul onClick={onClick} className="list">
         {items.map((item, index) => (
-            <li key={index} className={classNames(item.className, {active: item.active ? item.active : activeItem && activeItem.id === item.id})}
-                onClick={onClickItem ? () => onClickItem(item) : null}
+            <li key={index}
+            className={classNames(item.className, {
+              active: item.active
+                ? item.active
+                : activeItem && activeItem.id === item.id
+            })}
+            onClick={onClickItem ? () => onClickItem(item) : null}
             >
                 <i>
                     {item.icon ? (
@@ -26,10 +34,12 @@ function List ({items, isRemovable, onClick, onRemove, onClickItem, activeItem})
                         <ColorBadge color={item.color.name}/>
                     )}
                 </i>
+                <Link to ={`/lists/${id}`}>
                 <span>
                     {item.name}
                     {item.tasks && ` (${item.tasks.length})`}
                 </span>
+                </Link>
                 {isRemovable &&
                     <img 
                         onClick={() => removeList(item)}

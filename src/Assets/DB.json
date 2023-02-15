@@ -2,7 +2,7 @@
   "colors": [
     {
       "id": 1,
-      "hex": "#e3e639",
+      "hex": "#bbbe00",
       "name": "yellow"
     },
     {
@@ -73,7 +73,7 @@
       "id": 6
     },
     {
-      "name": "Something new to explore",
+      "name": "Smth to explore",
       "colorId": 8,
       "id": 7
     },
@@ -94,7 +94,7 @@
       "id": 2,
       "listId": 2,
       "text": "Install JSON server",
-      "completed": false
+      "completed": true
     },
     {
       "id": 3,
