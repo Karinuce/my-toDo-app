@@ -35,8 +35,8 @@ const Tasks = ({list, onEditTitle, onAddTask, onRemoveTask, onEditTask, onComple
                 </h1>
             </Link>
             <div className="tasks_items">
-                {!withoutEmpty && list.tasks && !list.tasks.length && 
-                    <h2>There are no tasks in this project</h2>}
+                {!withoutEmpty && list.tasks && !list.tasks.length && (
+                    <h2>There are no tasks in this project</h2>)}
                 {list.tasks && list.tasks.map(task => (
                     <Task 
                         key={task.id} 

@@ -160,7 +160,7 @@ function App() {
                 onEditTitle={onEditListTitle}
                 onRemoveTask={onRemoveTask}
                 onEditTask={onEditTask}
-                onCempleteTask={onCompleteTask}
+                onCompleteTask={onCompleteTask}
                 withoutEmpty
               />
             ))

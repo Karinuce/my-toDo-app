@@ -4,17 +4,16 @@ import classNames from 'classnames';
 import ColorBadge from '../ColorBadges';
 import CancelSvg from '../../Assets/icons/cancel.svg'
 import axios from 'axios';
-import {Link, useParams} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function List ({items, isRemovable, onClick, onRemove, onClickItem, activeItem}) {
-    const removeList = (item) => {
+    const removeList = item => {
         if (window.confirm('Delete this project from the list?')) {
             axios.delete('http://localhost:3001/lists/' + item.id).then(() => {
             onRemove(item.id);
             });
         }
     }
-    let {id} = useParams();
 
     return (
     <ul onClick={onClick} className="list">
@@ -28,13 +27,10 @@ function List ({items, isRemovable, onClick, onRemove, onClickItem, activeItem})
             onClick={onClickItem ? () => onClickItem(item) : null}
             >
                 <i>
-                    {item.icon ? (
-                        item.icon
-                    ) : (
-                        <ColorBadge color={item.color.name}/>
-                    )}
+                    {item.icon ? item.icon : <ColorBadge color={item.color.name}/>
+                    }
                 </i>
-                <Link to ={`/lists/${id}`}>
+                <Link to ={`/lists/${item.id}`}>
                 <span>
                     {item.name}
                     {item.tasks && ` (${item.tasks.length})`}
